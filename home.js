@@ -42,7 +42,7 @@ const onChose = async(id) => {
 
             `
         <form onsubmit="addToSession(${id})">
-        <input placeholder="quantity" required type="number" id="quantityCart" min="1" max="${limit}"/>
+        <input class="w-25" placeholder="quantity" required type="number" id="quantityCart" min="1" max="${limit}"/>
         <button class='btn btn-info'>Add</button>
         </form>
         `

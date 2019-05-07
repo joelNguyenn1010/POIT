@@ -12,7 +12,7 @@
     
     $temp = 0.0;
     foreach($data as $value) {
-        $temp += floatval($value['unit']);
+        $temp += floatval($value['unit']) * floatval($value['qty']);
     }
 
     echo '<td>Total: ' . $temp . '</td>';
