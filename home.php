@@ -16,16 +16,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
+
     <script src="./home.js"></script>
     <script src="./type.js"></script>
     <script src="./mapFood.js"></script>
+    <script src="./checkout.js"></script>
+    <script src="./ajax.js"></script>
+
     <title>Grocery Store</title>
-    <style>
-        html,
-        body {
-            background-color: #03FCFD;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="./style.css">
 
 </head>
 
@@ -63,7 +62,7 @@
 
                 <!-- retrieves the appropriate product entry from the MySQL products table  -->
                 <div class="p-2" id="product_details_topright">
-                    <h1>Details</h1>
+                    <h1 id="title-right-frame">Details</h1>
 
                     <table class="table">
                         <thead>
@@ -77,12 +76,13 @@
 
                         </thead>
 
-                        <tbody>
-                            <tr id="showDetails">
-
-                            </tr>
+                        <tbody id="showDetails">
+                      
                         </tbody>
                     </table>
+
+                    <div class="mt-5 mb-5"id="form-checkout"></div>
+
 
                     <div id="add-to-cart">
                     </div>
@@ -118,10 +118,10 @@
 
                         </tbody>
                     </table>
+
                     <!-- empty the shopping cart -->
-                    <button class="btn btn-info" onclick='clearSession()'>Clear</button>
+                    <button class="btn btn-info" onclick='clearSession()' id="clear">Clear</button>
                     <!-- complete their shopping session  -->
-                    <button class="btn btn-info">Checkout</button>
                 </div>
 
                 <!-- </div> -->

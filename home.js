@@ -25,89 +25,64 @@ function onCatagory(id) {
     }
 }
 
-//send data to nessacry php file and render any response with given document element id
-const sendDataToPHP = (elementID, method, PHPFilePath, data) => {
-    var ajax = new XMLHttpRequest(); 
-    ajax.onload = function () {
-        const onDocumentID = document.getElementById(elementID);
-        onDocumentID.innerHTML = this.responseText
-    }
 
-    ajax.open(method, PHPFilePath)
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    ajax.send(`${data}`)
-}
-
-
-
-
-function returnProductMatchID(xml, id) {
-    var xmlDoc = xml.responseXML;
-    var productList = xmlDoc.getElementsByTagName("product");
-    for (i = 0; i < productList.length; i++) {
-
-        var value = productList[i].getElementsByTagName("product_id")[0].childNodes[0].nodeValue
-        if (parseInt(value) === id) {
-            return productList[i]
-        }
-    }
-}
 
 
 
 //When user click the on area map with product id, 
-const onChose = async (id) => {
-    const data = await findProductInXMLWithID(id);
-    await sendDataToPHP("showDetails", "POST", "details.php", data);
-    document.getElementById("add-to-cart").innerHTML = `<button class='btn btn-primary' onclick=addToSession(${id})>Add</button>`
+const onChose = async(id) => {
+    //check if there is id and user have click on checkout button
+    if (id && !onCheckout) {
 
+        const limit = await findStockInXMLWithID(id)
+        console.log(limit)
+        document.getElementById("add-to-cart").innerHTML =
+
+            // get the limit input, fetch the data quantity
+
+            `
+        <form onsubmit="addToSession(${id})">
+        <input placeholder="quantity" required type="number" id="quantityCart" min="1" max="${limit}"/>
+        <button class='btn btn-info'>Add</button>
+        </form>
+        `
+        const data = await findProductInXMLWithID(id);
+        console.log(data)
+        await sendDataToPHP("showDetails", "POST", "details.php", data);
+    }
 }
 
 
-const addToSession = async (id) => {
-    const data = await findProductInXMLWithID(id);
+
+// add all matched product with given id to cart session
+// findProductInXMLWithID is function return promise with data that match with id
+// after that, send that data to suitable PHP file to render
+const addToSession = async(id) => {
+    //any customer function to find product go here
+    //get the quantity input from form
+    const quantity = document.getElementById("quantityCart").value;
+
+    //fetch all the nessessary info about product and attact it with the quanity form
+    const data = await findProductInXMLWithID(id) + `&quantity=${quantity}`;
+
+    // send all the data in form serializer format to cart.php
     await sendDataToPHP("show_carts", "POST", 'cart.php', data);
-
-}
-
-const findProductInXMLWithID = (id) => {
-    return new Promise(function (resolve, reject) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                const product = returnProductMatchID(this, id);
-                if (product) {
-                    const name = product.getElementsByTagName("product_name")[0].childNodes[0].nodeValue;
-                    const unit = product.getElementsByTagName("unit_price")[0].childNodes[0].nodeValue;
-                    const qty = product.getElementsByTagName("unit_quantity")[0].childNodes[0].nodeValue;
-                    const stock = product.getElementsByTagName("in_stock")[0].childNodes[0].nodeValue;
-                    const id = product.getElementsByTagName("product_id")[0].childNodes[0].nodeValue;
-                    const data = `id=${id}&name=${name}&unit=${unit}&qty=${qty}&stock=${stock}`
-
-                    resolve(data);
-
-                }
-            }
-        };
-        xhttp.open("GET", "./data.xml", true);
-        xhttp.send();
-
-    });
 }
 
 //will load all the data in session
-const onLoadDataSession = async () => {
+const onLoadDataSession = async() => {
     await sendDataToPHP("show_carts", "POST", 'onload.php');
 }
 
 
+//when user hit the clear session button
+//make ajax request to clear.php file to tell it to empty the cart session
 function clearSession() {
     var ajax = new XMLHttpRequest(); // simplified for clarity
-    ajax.onload = function () {
-        const tbody_data = document.getElementById("show_carts");
-        tbody_data.innerHTML = this.responseText
+    ajax.onload = function() {
+        //reload all components when finish clear session
+        onLoadDataSession()
     }
-
     ajax.open("GET", 'clear.php')
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ajax.send();

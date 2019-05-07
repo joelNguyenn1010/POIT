@@ -1,8 +1,5 @@
 <?php
 
-    // foreach($_POST as $post_value) {
-    //     echo strtoupper($post_value) . "<br />";
-    // }
 
    
     function countAndTotal() {
@@ -12,8 +9,8 @@
         $data = $_SESSION["cart"];
         echo "<div class='mt-5'><table class='table'><tbody><tr>";
     // print_r($_SESSION["cart"]);
-
-        $temp = 0.0;
+    
+    $temp = 0.0;
     foreach($data as $value) {
         $temp += floatval($value['unit']);
     }
@@ -25,6 +22,13 @@
 
 
     echo "</tr></tbody></table></div>";
+
+    if(count($data) == 0) {
+        echo "<h3 class='text-warning'>Cart is empty</h3>";
+    } else {
+        echo "<a href='#' class='btn btn-info' id='checkout' onclick='checkout()'>Checkout</a>";
+
+    }
 
     }
     // echo $_POST['name'];

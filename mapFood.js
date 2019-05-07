@@ -62,10 +62,9 @@
 // |
 // | 5003 | Cat Food | 2.00 | 500g | 200
 // |
-// | 5004 | Fish Food | 3.00 | 500g | 200 
+// | 5004 | Fish Food | 3.00 | 500g | 200
 
-const mapFresh =
-`
+const mapFresh = `
 <area onclick="onChose(3002)" coords="12,192,130,252" shape="rect">
 <area onclick="onChose(3000)" coords="64,366,214,429" shape="0">
 <area onclick="onChose(3001)" coords="237,367,387,428" shape="0">
@@ -75,21 +74,18 @@ const mapFresh =
 <area onclick="onChose(3007)" coords="648,192,765,249" shape="0">
 <area onclick="onChose(3005)" coords="771,188,892,250" shape="0">
 
-`
+`;
 
-
-const mapFrozen = 
-`
+const mapFrozen = `
 <area onclick="onChose(1002)" coords="11,232,161,302" shape="rect">
 <area onclick="onChose(1000)" coords="113,441,262,510" shape="0">
 <area onclick="onChose(1001)" coords="287,442,437,513" shape="0">
 <area onclick="onChose(1003)" coords="361,233,513,306" shape="0">
 <area onclick="onChose(1004)" coords="468,439,618,509" shape="0">
 <area onclick="onChose(1005)" coords="641,435,792,510" shape="0">
-`
+`;
 
-const mapBer =
-`
+const mapBer = `
 <area onclick="onChose(122)" coords="37,433,154,500" shape="rect">
 <area onclick="onChose(122)" coords="166,432,282,502" shape="0">
 <area onclick="onChose(122)" coords="293,432,412,503" shape="0">
@@ -97,16 +93,9 @@ const mapBer =
 <area onclick="onChose(122)" coords="552,432,668,501" shape="0">
 <area onclick="onChose(122)" coords="723,242,874,313" shape="0">
 
-`
+`;
 
-
-
-
-
-
-
-const mapHome =
-`
+const mapHome = `
 <area onclick="onChose(2)" coords="9,232,163,300" shape="rect">
 <area onclick="onChose(2)" coords="110,441,264,513" shape="0">
 <area onclick="onChose(2)" coords="284,437,439,513" shape="0">
@@ -115,18 +104,50 @@ const mapHome =
 <area onclick="onChose(2)" coords="642,440,797,510" shape="0">
 <area onclick="onChose(2)" coords="714,230,867,300" shape="0">
 
-`
+`;
 
-
-
-
-const mapPet =
-`
+const mapPet = `
 <area onclick="onChose(2)" coords="187,231,338,301" shape="rect">
 <area onclick="onChose(2)" coords="362,230,513,301" shape="0">
 <area onclick="onChose(2)" coords="466,438,620,509" shape="0">
 <area onclick="onChose(2)" coords="641,439,796,509" shape="0">
 <area onclick="onChose(2)" coords="715,231,865,302" shape="0">
 
-`
+`;
 
+const purchaseForm = `
+<form>
+
+  <div class="form-group">
+    <label for="nameCheckout">Name</label>
+    <input type="text" class="form-control" id="nameCheckout" required placeholder="Email">
+  </div>
+
+  <div class="form-group">
+    <label for="addressCheckout">Address</label>
+    <input type="text" class="form-control" id="addressCheckout" required placeholder="Address">
+  </div>
+
+  <div class="form-group">
+    <label for="suburbCheckout">Suburb</label>
+    <input type="text" class="form-control" id="suburbCheckout" required placeholder="Suburb">
+  </div>
+
+<div class="form-group">
+<label for="stateCheckout">State</label>
+<input type="text" class="form-control" id="stateCheckout" required placeholder="State">
+</div>
+
+<div class="form-group">
+<label for="emailCheckout">Email</label>
+<input type="email" class="form-control" id="emailCheckout" required placeholder="Email">
+</div>
+
+<div class="form-group">
+<label for="countryCheckout">Country</label>
+<input type="text" class="form-control" id="countryCheckout" required placeholder="Country">
+</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+`;
