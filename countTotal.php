@@ -15,7 +15,7 @@
         $temp += floatval($value['unit']) * floatval($value['qty']);
     }
 
-    echo '<td>Total: ' . $temp . '</td>';
+    echo '<td>Total: $' . $temp . '</td>';
 
 
     echo "<td>Number of items ". count($data) . "</td>";

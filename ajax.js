@@ -25,12 +25,17 @@ function returnProductMatchID(xml, id) {
             const product = productList[i]
 
             if (product) {
+
+                //fetch all the details of the product
                 const name = product.getElementsByTagName("product_name")[0].childNodes[0].nodeValue;
                 const unit = product.getElementsByTagName("unit_price")[0].childNodes[0].nodeValue;
                 const qty = product.getElementsByTagName("unit_quantity")[0].childNodes[0].nodeValue;
                 const stock = product.getElementsByTagName("in_stock")[0].childNodes[0].nodeValue;
                 const id = product.getElementsByTagName("product_id")[0].childNodes[0].nodeValue;
+
+                //put all the detail in Form format for POST it to PHP file
                 const data = `id=${id}&name=${name}&unit=${unit}&qty=${qty}&stock=${stock}`
+
                 return data;
 
             }
@@ -41,20 +46,18 @@ function returnProductMatchID(xml, id) {
 
 function returnQtyMatchID(xml, id) {
     var xmlDoc = xml.responseXML;
+    //fetch all the products data
     var productList = xmlDoc.getElementsByTagName("product");
     for (i = 0; i < productList.length; i++) {
 
         var value = productList[i].getElementsByTagName("product_id")[0].childNodes[0].nodeValue
+            //find the specfific given product with id 
         if (parseInt(value) === id) {
             const product = productList[i]
 
             if (product) {
-                // const name = product.getElementsByTagName("product_name")[0].childNodes[0].nodeValue;
-                // const unit = product.getElementsByTagName("unit_price")[0].childNodes[0].nodeValue;
-                // const qty = product.getElementsByTagName("unit_quantity")[0].childNodes[0].nodeValue;
                 const stock = product.getElementsByTagName("in_stock")[0].childNodes[0].nodeValue;
-                // const id = product.getElementsByTagName("product_id")[0].childNodes[0].nodeValue;
-                // const data = `id=${id}&name=${name}&unit=${unit}&qty=${qty}&stock=${stock}`
+
                 return parseFloat(stock);
 
             }
@@ -96,6 +99,5 @@ const findStockInXMLWithID = (id) => {
         };
         xhttp.open("GET", "./data.xml", true);
         xhttp.send();
-
     });
 }

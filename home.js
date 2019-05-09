@@ -35,13 +35,13 @@ const onChose = async(id) => {
     if (id && !onCheckout) {
 
         const limit = await findStockInXMLWithID(id)
-        console.log(limit)
+
         document.getElementById("add-to-cart").innerHTML =
 
             // get the limit input, fetch the data quantity
-
+            // the return false here is to prevent default (stop page reload)
             `
-        <form onsubmit="addToSession(${id})">
+        <form onsubmit="addToSession(${id}); return false; ">
         <input class="w-25" placeholder="quantity" required type="number" id="quantityCart" min="1" max="${limit}"/>
         <button class='btn btn-info'>Add</button>
         </form>
@@ -49,6 +49,7 @@ const onChose = async(id) => {
         const data = await findProductInXMLWithID(id);
         console.log(data)
         await sendDataToPHP("showDetails", "POST", "details.php", data);
+
     }
 }
 
@@ -59,7 +60,7 @@ const onChose = async(id) => {
 // after that, send that data to suitable PHP file to render
 const addToSession = async(id) => {
     //any customer function to find product go here
-    //get the quantity input from form
+    // get the quantity input from form
     const quantity = document.getElementById("quantityCart").value;
 
     //fetch all the nessessary info about product and attact it with the quanity form
@@ -67,6 +68,10 @@ const addToSession = async(id) => {
 
     // send all the data in form serializer format to cart.php
     await sendDataToPHP("show_carts", "POST", 'cart.php', data);
+
+    // prevent default
+
+    return false
 }
 
 //will load all the data in session

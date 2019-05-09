@@ -15,17 +15,10 @@
     $qty = $_POST["quantity"];
     $stock = $_POST["stock"];
     
-    print_r(in_array($id, $data));
-
-    // if($data[$id]) {
-    //     echo "asdasdasdjaufeawefuahwo";
-    // }
-    // array_push(
-        $data[$id] = [id=>$id, name=>$name, unit=>$unit, qty=>$qty, stock=>$stock];
-    // );
-    // $_SESSION["cart"] = $data;
-    // print_r($_SESSION["cart"]);
-    // print_r($data);
+    // print_r(in_array($id, $data));
+    if($qty && is_numeric($qty) == 1) {
+    $data[$id] = [id=>$id, name=>$name, unit=>$unit, qty=>$qty, stock=>$stock];
+}
     
     $_SESSION["cart"] = $data;
 

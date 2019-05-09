@@ -37,7 +37,7 @@
                 <!-- Loop through all catagories -->
                 <div class="d-flex flex-column">
                     <div id="root">
-                        <img src="./images/root.jpg" class="w-100" usemap="#root-map" />
+                        <img src="./images/root.jpg" usemap="#root-map" />
                         <map name="root-map" id="root-map">
                             <area onmouseover="onCatagory(FROZENFOOD)" coords="10,258,163,330" shape="rect">
                             <area onmouseover="onCatagory(FRESHFOOD)" coords="187,258,336,330" shape="rect">
@@ -130,11 +130,7 @@
     </div>
     </div>
 
-    <script>(function ($) {
 
-            // put all that "wl_alert" code here   
-
-        }(jQuery));</script>
 </body>
 
 </html>
